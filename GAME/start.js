@@ -61,6 +61,13 @@ $(document).ready(() => {
     onrun: [
       { arr: "up", pos: "top:85.5%;left:53.3%;", img: "img/button12.png" },
       { arr: "down", pos: "top:85.5%;left:48.5%;", img: "img/button12.png" },
+      {
+        arr: "gymfront",
+        pos: "top:0%; right: 1%;",
+        img: "img/arrow.png",
+        rot: "transform: rotate( -90deg );",
+        size: "width:10%;",
+      },
     ],
     dead: [{ arr: "babel", pos: "top:15%;left:8%;", img: "img/button13.png" }],
   };
