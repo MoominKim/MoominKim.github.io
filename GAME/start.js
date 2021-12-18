@@ -25,6 +25,13 @@ $(document).ready(() => {
       { arr: "run", pos: "top:50%;left:40%;", img: "img/button3.png" },
       { arr: "dead", pos: "top:19%;left:19%;", img: "img/button4.png" },
       { arr: "gymchair", pos: "top:30%;left:3%;", img: "img/button5.png" },
+      {
+        arr: "start",
+        pos: "bottom:0%; left: 1%;",
+        img: "img/arrow.png",
+        rot: "transform: rotate( -90deg );",
+        size: "width:10%;",
+      },
     ],
     gymchair: [
       { arr: "chairpuzzle", pos: "top:25%;left:40%;", img: "img/button6.png" },
@@ -42,7 +49,6 @@ $(document).ready(() => {
         pos: "bottom:0%;left:1%;",
         img: "img/arrow.png",
         rot: "transform: rotate( -90deg );",
-        size: "width:10%;",
       },
     ],
     advancedchair: [
@@ -204,12 +210,16 @@ $(document).ready(() => {
     changespeed(false);
   });
   $(document).on("click", ".dead", () => {
-    if (babelsolved == true) makemodal("cleared");
-    else if (runsolved == false) makemodal("notnow");
-    else changepage("dead");
+    if (babelsolved == true) {
+      makemodal("cleared");
+    } else if (runsolved == true) {
+      changepage("dead");
+    } else {
+      makemodal("notnow");
+    }
   });
   $(document).on("click", ".babel", () => {
     makemodal("babel");
   });
-  changepage("start");
+  changepage("gymfront");
 });
