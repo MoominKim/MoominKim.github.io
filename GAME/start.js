@@ -204,8 +204,9 @@ $(document).ready(() => {
     }
   });
   $(document).on("click", ".run", () => {
-    if (runsolved) makemodal("cleared");
-    else changepage("run");
+    if (runsolved == true) makemodal("cleared");
+    else if (chairsolved == true) changepage("run");
+    else makemodal("notnow");
   });
   $(document).on("click", ".onrun", () => {
     changepage("onrun");
