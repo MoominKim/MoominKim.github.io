@@ -205,7 +205,7 @@ $(document).ready(() => {
   });
   $(document).on("click", ".dead", () => {
     if (babelsolved == true) makemodal("cleared");
-    if (runsolved == false) makemodal("notnow");
+    else if (runsolved == false) makemodal("notnow");
     else changepage("dead");
   });
   $(document).on("click", ".babel", () => {
