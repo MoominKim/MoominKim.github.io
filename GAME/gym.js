@@ -186,6 +186,26 @@ $(document).ready(() => {
         }
     }
     /*const->상수 ,let->변수,var(x)->쓰지마셈 ㅇㅋ*/
+    $(document).on("click", "#foreground, .exit", function (e) {
+        if (e.target === this) {
+            $(".popup").remove();
+            $("#foreground").hide();
+            $(".button").show();
+            if (page == "openchair") {
+                chairsolved = true;
+                changepage("gym");
+            }
+            if (page == "dead") {
+                babelsolved = true;
+                changepage("gym");
+            }
+            if (page == "onrun" && nowspeed == 1) changepage("onrun");
+            if (page == "onrun" && nowspeed == 3) {
+                runsolved = 1;
+                changepage("gym");
+            }
+        }
+    });
     $(document).on("click", ".start", () => {
         location.href = "start.html";
     });
@@ -212,26 +232,6 @@ $(document).ready(() => {
     });
     $(document).on("click", ".modal", () => {
         if (".openchair") makemodal("chair");
-    });
-    $(document).on("click", "#foreground, .exit", function (e) {
-        if (e.target === this) {
-            $(".popup").remove();
-            $("#foreground").hide();
-            $(".button").show();
-            if (page == "openchair") {
-                chairsolved = true;
-                changepage("gym");
-            }
-            if (page == "dead") {
-                babelsolved = true;
-                changepage("gym");
-            }
-            if (page == "onrun" && nowspeed == 1) changepage("onrun");
-            if (page == "onrun" && nowspeed == 3) {
-                runsolved = 1;
-                changepage("gym");
-            }
-        }
     });
     $(document).on("click", ".run", () => {
         if (runsolved == true) makemodal("cleared");
