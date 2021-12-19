@@ -69,6 +69,16 @@ $(document).ready(function () {
             desc: "스쿼시 공이 없다..",
             id: "noball",
         },
+        hasracket: {
+            name: "?",
+            desc: "이미 라켓이 있다",
+            id: "hasracket",
+        },
+        hasball: {
+            name: "?",
+            desc: "이미 공이 있다",
+            id: "hasball",
+        },
     };
 
     /*
@@ -160,11 +170,19 @@ $(document).ready(function () {
     $(document).on("click", ".button", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
         if (myclass == "balls") {
-            makemodal("getball");
+            if (isball == true) {
+                makemodal("hasball");
+            } else {
+                makemodal("getball");
+            }
             return;
         }
         if (myclass == "rackets") {
-            makemodal("getracket");
+            if (isracket == true) {
+                makemodal("hasracket");
+            } else {
+                makemodal("getracket");
+            }
             return;
         }
         if (myclass == "squashroom") {
