@@ -1,8 +1,8 @@
-$(document).ready(() => {
+$(document).ready(function () {
     let nowmodal;
     let locksolved;
-    let ralysolved;
-    let consolsolved;
+    let ralysolved = localStorage.getItem("solved");
+    localStorage.removeItem("solved");
     $("#foreground").hide();
     const arrowpos = {
         cabinralyfocus: [
@@ -29,13 +29,6 @@ $(document).ready(() => {
         cabinlock: [
             {
                 arr: "cabinfocus",
-                pos: "bottom:0%; left: 1%;",
-                rot: "transform: rotate( -90deg );",
-            },
-        ],
-        ralyconsole: [
-            {
-                arr: "ralyfocus",
                 pos: "bottom:0%; left: 1%;",
                 rot: "transform: rotate( -90deg );",
             },
@@ -92,6 +85,20 @@ $(document).ready(() => {
                 img: "img/button17.png",
             },
         ],
+        ralyconsole: [
+            {
+                arr: "consoleproblem",
+                pos: "top:1%;left:1%",
+                img: "img/button17.png",
+            },
+        ],
+        rackets: [
+            {
+                arr: "racket",
+                pos: "top:40%;left:50%",
+                img: "img/button17.png",
+            },
+        ],
     };
     const Mod = {
         cleared: {
@@ -121,8 +128,28 @@ $(document).ready(() => {
         },
         actived: {
             name: "계기판이다",
-            desc: "퍼즐을 풀면 작동할 수 있을 것 같다",
+            desc: "퍼즐을 풀어보자",
             id: "actived",
+        },
+        problem: {
+            name: "비밀번호",
+            desc: "GAME에 비밀번호를 입력하세요",
+            id: "problem",
+        },
+        lockhint: {
+            name: "탁구채",
+            desc: "중요한 탁구채의 정체에 대해 알아냈다.",
+            id: "lockhint",
+        },
+        getlacket: {
+            name: "LSI의 탁구채",
+            desc: "디미 왕국의 탁구 챔피언이 쓰던 탁구채...와 같은 브랜드입니다. 건강증진센터의 전설이었던 플라톤이 애용하던 탁구채...와 비슷하게 생겼네요",
+            id: "getlacket",
+        },
+        opendoor: {
+            name: "!",
+            desc: "황금공을 갖다대자 문이 열린다",
+            id: "opendoor",
         },
     };
 
@@ -160,7 +187,24 @@ $(document).ready(() => {
             $("#foreground").hide();
             $(".button").show();
             if (nowmodal == "actived") {
-                changepage("ralyconsole");
+                makemodal("problem");
+            }
+            if (nowmodal == "ralyin") {
+                ralysolved = true;
+            }
+            if (nowmodal == "lockhint") {
+                locksolved = true;
+                changepage("cabinlock");
+            }
+            if (nowmodal == "cantfind") {
+                changepage("tenis");
+            }
+            if (nowmodal == "getlacket") {
+                changepage("tenis");
+                localStorage.setItem("lacket", 1);
+            }
+            if (nowmodal == "opendoor") {
+                changepage("cabinopen");
             }
         }
     });
@@ -197,6 +241,12 @@ $(document).ready(() => {
                 $("body").append(makearrow(info));
             });
         }
+        if (page == "ralyconsole") {
+            makemodal("actived");
+        }
+        if (page == "cabinopen") {
+            makemodal("lockhint");
+        }
     }
     /*
 
@@ -209,23 +259,32 @@ $(document).ready(() => {
     */
     $(document).on("click", ".button", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
-        if (myclass == "rackets" && locksolved != true) {
-            makemodal("cantfind");
-            return;
+        if (page == "rackets") {
+            if (locksolved == true) {
+                makemodal("getlacket");
+                return;
+            } else {
+                makemodal("cantfind");
+                return;
+            }
         }
-        if (page == "cabinlock" && ralysolved != true) {
-            makemodal("needball");
-            return;
-        }
-        if (page == "cabinlock" && locksolved == true) {
-            makemodal("cleared");
-            return;
+        if (page == "cabinlock") {
+            if (locksolved == true) {
+                makemodal("cleared");
+                return;
+            } else if (ralysolved == true) {
+                makemodal("opendoor");
+                return;
+            } else {
+                makemodal("needball");
+                return;
+            }
         }
         if (myclass == "table" && ralysolved != true) {
             makemodal("describe");
             return;
         }
-        if (myclass == "table" && consolsolved != true) {
+        if (myclass == "table" && ralysolved != true) {
             makemodal("ralyin");
             return;
         }
@@ -233,7 +292,7 @@ $(document).ready(() => {
             makemodal("cleared");
             return;
         }
-        if (myclass == "ralyconsole" && ralysolved != true) {
+        if (page == "ralyconsole" && ralysolved != true) {
             makemodal("actived");
             return;
         }
@@ -241,6 +300,7 @@ $(document).ready(() => {
             makemodal("cleared");
             return;
         }
+
         changepage(myclass);
     });
     $(document).on("click", ".arrow", function (e) {

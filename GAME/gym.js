@@ -1,5 +1,4 @@
 $(document).ready(() => {
-    let babelsolved;
     let chairsolved;
     let runsolved;
     let page;
@@ -197,6 +196,7 @@ $(document).ready(() => {
             }
             if (page == "dead") {
                 babelsolved = true;
+                localStorage.setItem("babel", 1);
                 changepage("gym");
             }
             if (page == "onrun" && nowspeed == 1) changepage("onrun");
