@@ -93,21 +93,21 @@ $(document).ready(function () {
         cabinlock: [
             {
                 arr: "cabinopen",
-                pos: "top:1%;left:1%",
-                img: "img/button17.png",
+                pos: "top:10%;left:35%;",
+                img: "img/goldencircle.png",
             },
         ],
         ralyconsole: [
             {
                 arr: "consoleproblem",
-                pos: "top:1%;left:1%",
+                pos: "top:1%;left:1%;",
                 img: "img/button17.png",
             },
         ],
         rackets: [
             {
                 arr: "racket",
-                pos: "top:40%;left:50%",
+                pos: "top:40%;left:50%;",
                 img: "img/button17.png",
             },
         ],
