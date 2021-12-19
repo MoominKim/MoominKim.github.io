@@ -7,6 +7,13 @@ $(document).ready(function () {
     localStorage.removeItem("racket");
     $("#foreground").hide();
     const arrowpos = {
+        squash: [
+            {
+                arr: "start",
+                pos: "bottom:0%; left: 1%;",
+                rot: "transform: rotate( -90deg );",
+            },
+        ],
         squashin: [
             {
                 arr: "squash",
@@ -174,6 +181,10 @@ $(document).ready(function () {
     });
     $(document).on("click", ".arrow", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
+        if (myclass == "start") {
+            location.href = "start.html";
+            return;
+        }
         changepage(myclass);
     });
     changepage("squash");

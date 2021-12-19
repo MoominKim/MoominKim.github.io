@@ -181,7 +181,7 @@ $(document).ready(() => {
             else
                 $("#background").prop(
                     "src",
-                    "onrun" + (nowspeed = nowspeed - 1) + ".jpg"
+                    "background/onrun" + (nowspeed = nowspeed - 1) + ".jpg"
                 );
         }
     }
