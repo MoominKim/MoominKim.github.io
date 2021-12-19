@@ -55,7 +55,7 @@ $(document).ready(function () {
             },
             {
                 arr: "rackets",
-                pos: "bottom:29.5%;left:2%;",
+                pos: "bottom:13%;left:0%;",
                 img: "img/button14.png",
             },
         ],
@@ -79,8 +79,8 @@ $(document).ready(function () {
             },
             {
                 arr: "ralyconsole",
-                pos: "top:1%;left:1%;",
-                img: "img/button18.png",
+                pos: "top:54%;left:0%;",
+                img: "img/ralyconsole.png",
             },
         ],
         cabinfocus: [
