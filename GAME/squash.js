@@ -3,8 +3,10 @@ $(document).ready(function () {
     let nowmodal;
     let isball = localStorage.getItem("ball");
     let isracket = localStorage.getItem("racket");
+    let gamesolved = localStorage.getItem("game");
     localStorage.removeItem("ball");
     localStorage.removeItem("racket");
+    localStorage.removeItem("game");
     $("#foreground").hide();
     const arrowpos = {
         squash: [
@@ -79,6 +81,21 @@ $(document).ready(function () {
             desc: "이미 공이 있다",
             id: "hasball",
         },
+        gamedesc: {
+            name: "!",
+            desc: "반짝이는 곳을 공으로 맞춰라!",
+            id: "gamedesc",
+        },
+        gethint: {
+            name: "의문의 분노가 차오른다",
+            desc: "스쿼시볼을 잘 알아볼것 같다",
+            id: "gethint",
+        },
+        getrelic: {
+            name: "상해를 가한 스쿼시볼",
+            desc: "내년에 ㅎㅎ가 수능을 망치면 이걸 머리에 맞은 탓입니다. 아 암튼 그럼.)",
+            id: "relic",
+        },
     };
 
     /*
@@ -88,10 +105,69 @@ $(document).ready(function () {
 
             *********************
             모달시작
-            *********************
+        *********************
 
 
     */
+    const pos = [
+        {
+            leftX: 340,
+            rightX: 405,
+            upY: 100,
+            lowY: 170,
+        },
+        {
+            leftX: 960,
+            rightX: 1050,
+            upY: 365,
+            lowY: 450,
+        },
+        {
+            leftX: 550,
+            rightX: 650,
+            upY: 245,
+            lowY: 320,
+        },
+        {
+            leftX: 900,
+            rightX: 1000,
+            upY: 100,
+            lowY: 250,
+        },
+    ];
+    function makegame() {
+        changepage("game");
+        let now = 0;
+        let x;
+        let y;
+        let top = (pos[now].upY + pos[now].lowY) / 2;
+        let left = (pos[now].leftX + pos[now].rightX) / 2;
+        let gamebutton = {
+            pos: "top:" + top + ";left:" + left,
+            img: "img/gamebutton.png",
+        };
+        //alert(gamebutton.pos + " " + gamebutton.img);
+        makebutton(gamebutton);
+        $(document).on("click", function (e) {
+            x = e.pageX;
+            y = e.pageY;
+            if (
+                pos[now].leftX <= x &&
+                x <= pos[now].rightX &&
+                pos[now].upY <= y &&
+                y <= pos[now].lowY
+            ) {
+                //alert(x + " " + y);
+                if (now == 3) {
+                    makemodal("gethint");
+                    $(".button").remove();
+                    return;
+                }
+                $(".button").remove();
+                now += 1;
+            }
+        });
+    }
     function makemodal(modalname) {
         const c = Mod[modalname];
         nowmodal = modalname;
@@ -121,6 +197,14 @@ $(document).ready(function () {
             if (nowmodal == "getracket") {
                 isracket = true;
                 localStorage.setItem("racket", 1);
+            }
+            if (nowmodal == "gamedesc") {
+                makegame();
+            }
+            if (nowmodal == "gethint") {
+                gamesolved = 1;
+                localStorage.setItem("game", 1);
+                changepage("squash");
             }
         }
     });
@@ -157,6 +241,9 @@ $(document).ready(function () {
                 $("body").append(makearrow(info));
             });
         }
+        if (page == "squashroom") {
+            makemodal("gamedesc");
+        }
     }
     /*
 
@@ -170,9 +257,14 @@ $(document).ready(function () {
     $(document).on("click", ".button", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
         if (myclass == "balls") {
+            if (gamesolved == true) {
+                makemodal("getrelic");
+                return;
+            }
             if (isball == true) {
                 makemodal("hasball");
-            } else {
+            }
+            if (isball != true) {
                 makemodal("getball");
             }
             return;
@@ -206,4 +298,5 @@ $(document).ready(function () {
         changepage(myclass);
     });
     changepage("squash");
+    //makegame();
 });

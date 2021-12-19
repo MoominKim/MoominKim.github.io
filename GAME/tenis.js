@@ -50,25 +50,25 @@ $(document).ready(function () {
         tenis: [
             {
                 arr: "cabinralyfocus",
-                pos: "top:29.5%;left:46%;",
-                img: "img/button14.png",
+                pos: "top:29.5%;left:43.5%;height:23vh;width:40vh;",
+                img: "img/cabinralyfocus.png",
             },
             {
                 arr: "rackets",
-                pos: "bottom:13%;left:0%;",
-                img: "img/button14.png",
+                pos: "bottom:13.5%;left:0%;height:21vh;width:15vw;",
+                img: "img/rackets.png",
             },
         ],
         cabinralyfocus: [
             {
                 arr: "ralyfocus",
-                pos: "top:30%;left:50%;",
-                img: "img/button15.png",
+                pos: "top:23%;left:30%;height:77vh;width:143vh;",
+                img: "img/ralyfocus.png",
             },
             {
                 arr: "cabinfocus",
-                pos: "top : 1%,left: 1%;",
-                img: "img/button16.png",
+                pos: "top : 5.5%;left: 14%;height:65vh;width:45vh;",
+                img: "img/cabinfocus.png",
             },
         ],
         ralyfocus: [
