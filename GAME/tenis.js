@@ -1,10 +1,22 @@
 $(document).ready(function () {
+    let page = localStorage.getItem("start");
+    localStorage.removeItem("start");
+    if (!page) page = "tenis";
     let nowmodal;
-    let locksolved;
-    let ralysolved = localStorage.getItem("solved");
-    localStorage.removeItem("solved");
+    let locksolved = localStorage.getItem("lock");
+    let ralysolved = localStorage.getItem("raly");
+    let consolesolved = localStorage.getItem("console");
+    let lacketsolved = localStorage.getItem("lacket");
+    localStorage.removeItem("console");
     $("#foreground").hide();
     const arrowpos = {
+        tenis: [
+            {
+                arr: "gym",
+                pos: "bottom:0%; left: 1%;",
+                rot: "transform: rotate( -90deg );",
+            },
+        ],
         cabinralyfocus: [
             {
                 arr: "tenis",
@@ -113,7 +125,7 @@ $(document).ready(function () {
         },
         needball: {
             name: "??",
-            desc: "탁구채와 비슷한 크기의 홈이 파여 있다",
+            desc: "탁구공과 비슷한 크기의 홈이 파여 있다",
             id: "needball",
         },
         describe: {
@@ -191,9 +203,11 @@ $(document).ready(function () {
             }
             if (nowmodal == "ralyin") {
                 ralysolved = true;
+                localStorage.setItem("raly", 1);
             }
             if (nowmodal == "lockhint") {
                 locksolved = true;
+                localStorage.setItem("lock", 1);
                 changepage("cabinlock");
             }
             if (nowmodal == "cantfind") {
@@ -202,6 +216,7 @@ $(document).ready(function () {
             if (nowmodal == "getlacket") {
                 changepage("tenis");
                 localStorage.setItem("lacket", 1);
+                lacketsolved = 1;
             }
             if (nowmodal == "opendoor") {
                 changepage("cabinopen");
@@ -280,32 +295,39 @@ $(document).ready(function () {
                 return;
             }
         }
-        if (myclass == "table" && ralysolved != true) {
-            makemodal("describe");
-            return;
+        if (myclass == "table") {
+            if (consolesolved != true) {
+                makemodal("describe");
+                return;
+            }
+            if (consolesolved == true) {
+                makemodal("ralyin");
+                return;
+            }
+            if (ralysolved == true) {
+                makemodal("cleared");
+                return;
+            }
         }
-        if (myclass == "table" && ralysolved != true) {
-            makemodal("ralyin");
-            return;
+        if (page == "ralyconsole") {
+            if (ralysolved == true) {
+                makemodal("cleared");
+                return;
+            } else {
+                makemodal("actived");
+                return;
+            }
         }
-        if (myclass == "table" && ralysolved == true) {
+        if (myclass == "rackets" && lacketsolved == true) {
             makemodal("cleared");
             return;
         }
-        if (page == "ralyconsole" && ralysolved != true) {
-            makemodal("actived");
-            return;
-        }
-        if (myclass == "ralyconsole" && ralysolved == true) {
-            makemodal("cleared");
-            return;
-        }
-
         changepage(myclass);
     });
     $(document).on("click", ".arrow", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
-        changepage(myclass);
+        if (myclass == "gym") location.href = "gym.html";
+        else changepage(myclass);
     });
-    changepage("tenis");
+    changepage(page);
 });

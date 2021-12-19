@@ -1,6 +1,7 @@
 $(document).ready(() => {
-    let chairsolved;
-    let runsolved;
+    let babelsolved = localStorage.getItem("babel");
+    let chairsolved = localStorage.getItem("chair");
+    let runsolved = localStorage.getItem("run");
     let page;
     let nowspeed = 1;
     $("#foreground").hide();
@@ -192,6 +193,7 @@ $(document).ready(() => {
             $(".button").show();
             if (page == "openchair") {
                 chairsolved = true;
+                localStorage.setItem("chair", 1);
                 changepage("gym");
             }
             if (page == "dead") {
@@ -201,7 +203,8 @@ $(document).ready(() => {
             }
             if (page == "onrun" && nowspeed == 1) changepage("onrun");
             if (page == "onrun" && nowspeed == 3) {
-                runsolved = 1;
+                runsolved = true;
+                localStorage.setItem("run", 1);
                 changepage("gym");
             }
         }
@@ -260,6 +263,7 @@ $(document).ready(() => {
         makemodal("babel");
     });
     $(document).on("click", ".tenis", () => {
+        localStorage.setItem("start", "tenis");
         location.href = "tenis.html";
     });
     changepage("gym");
