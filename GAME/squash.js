@@ -1,10 +1,68 @@
 $(document).ready(function () {
     let page;
     let nowmodal;
+    let isball = localStorage.getItem("ball");
+    let isracket = localStorage.getItem("racket");
+    localStorage.removeItem("ball");
+    localStorage.removeItem("racket");
     $("#foreground").hide();
-    const arrowpos = {};
-    const buttonpos = {};
-    const Mod = {};
+    const arrowpos = {
+        squashin: [
+            {
+                arr: "squash",
+                pos: "bottom:0%; left: 1%;",
+                rot: "transform: rotate( -90deg );",
+            },
+        ],
+    };
+    const buttonpos = {
+        squash: [
+            {
+                arr: "squashin",
+                pos: "top:70%;left:15%;",
+                img: "img/button14.png",
+            },
+            {
+                arr: "squashroom",
+                pos: "top:70%;left:75%;",
+                img: "img/button14.png",
+            },
+        ],
+        squashin: [
+            {
+                arr: "balls",
+                pos: "top:70%;left:70%;",
+                img: "img/button14.png",
+            },
+            {
+                arr: "rackets",
+                pos: "top:30%;left:70%;",
+                img: "img/button14.png",
+            },
+        ],
+    };
+    const Mod = {
+        getracket: {
+            name: "!",
+            desc: "스쿼시 라켓을 얻었다",
+            id: "getracket",
+        },
+        getball: {
+            name: "!",
+            desc: "스쿼시 공을 얻었다",
+            id: "getball",
+        },
+        noracket: {
+            name: "ㅠㅠ",
+            desc: "스쿼시 라켓이 없다..",
+            id: "noracket",
+        },
+        noball: {
+            name: "ㅠㅠ",
+            desc: "스쿼시 공이 없다..",
+            id: "noball",
+        },
+    };
 
     /*
 
@@ -39,6 +97,14 @@ $(document).ready(function () {
             $(".popup").remove();
             $("#foreground").hide();
             $(".button").show();
+            if (nowmodal == "getball") {
+                isball = true;
+                localStorage.setItem("ball", 1);
+            }
+            if (nowmodal == "getracket") {
+                isracket = true;
+                localStorage.setItem("racket", 1);
+            }
         }
     });
     /*
@@ -86,6 +152,24 @@ $(document).ready(function () {
     */
     $(document).on("click", ".button", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
+        if (myclass == "balls") {
+            makemodal("getball");
+            return;
+        }
+        if (myclass == "rackets") {
+            makemodal("getracket");
+            return;
+        }
+        if (myclass == "squashroom") {
+            if (isball != true) {
+                makemodal("noball");
+                return;
+            }
+            if (isracket != true) {
+                makemodal("noracket");
+                return;
+            }
+        }
         changepage(myclass);
     });
     $(document).on("click", ".arrow", function (e) {
