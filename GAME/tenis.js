@@ -1,13 +1,11 @@
 $(document).ready(function () {
     let page = localStorage.getItem("start");
-    localStorage.removeItem("start");
     if (!page) page = "tenis";
     let nowmodal;
     let locksolved = localStorage.getItem("lock");
     let ralysolved = localStorage.getItem("raly");
     let consolesolved = localStorage.getItem("console");
     let lacketsolved = localStorage.getItem("lacket");
-    localStorage.removeItem("console");
     $("#foreground").hide();
     const arrowpos = {
         tenis: [
@@ -74,8 +72,8 @@ $(document).ready(function () {
         ralyfocus: [
             {
                 arr: "table",
-                pos: "top:30%;left:50%;",
-                img: "img/button15.png",
+                pos: "top:55%;left:20%;",
+                img: "img/table.png",
             },
             {
                 arr: "ralyconsole",
@@ -248,7 +246,13 @@ $(document).ready(function () {
         $(".arrow").remove();
         if (buttonpos[background]) {
             buttonpos[background].forEach((info) => {
+                if (info.arr == "table" && consolesolved != true) {
+                    info.img = "img/button14.png";
+                }
                 $("body").append(makebutton(info));
+                if (info.arr == "table" && consolesolved != true) {
+                    info.img = "img/table.png";
+                }
             });
         }
         if (arrowpos[background]) {

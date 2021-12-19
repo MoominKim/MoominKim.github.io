@@ -4,9 +4,6 @@ $(document).ready(function () {
     let isball = localStorage.getItem("ball");
     let isracket = localStorage.getItem("racket");
     let gamesolved = localStorage.getItem("game");
-    localStorage.removeItem("ball");
-    localStorage.removeItem("racket");
-    localStorage.removeItem("game");
     $("#foreground").hide();
     const arrowpos = {
         squash: [
@@ -51,6 +48,11 @@ $(document).ready(function () {
         ],
     };
     const Mod = {
+        cleared: {
+            name: "?",
+            desc: "더 이상 볼 일이 없는 듯 하다..",
+            id: "cleared",
+        },
         getracket: {
             name: "!",
             desc: "스쿼시 라켓을 얻었다",
@@ -88,7 +90,7 @@ $(document).ready(function () {
         },
         gethint: {
             name: "의문의 분노가 차오른다",
-            desc: "스쿼시볼을 잘 알아볼것 같다",
+            desc: "스쿼시볼을 잘 알아볼 것 같다",
             id: "gethint",
         },
         getrelic: {
@@ -97,7 +99,40 @@ $(document).ready(function () {
             id: "relic",
         },
     };
+    /*
 
+
+    
+    */
+
+    function makearrow(info) {
+        return `<img class="arrow ${info.arr}" style="${info.pos} ${info.rot}" src="img/arrow.png">`;
+    }
+    function makebutton(info) {
+        //alert(info.arr + " " + info.pos + " " + info.img);
+        return `<img class="button ${info.arr}" style="${info.pos}" src="${info.img}">`;
+    }
+    function changepage(background) {
+        //alert(background);
+        page = background;
+        $("#background").prop("src", "background/" + page + ".jpg");
+        $(".button").remove();
+        $(".arrow").remove();
+        if (buttonpos[background]) {
+            buttonpos[background].forEach((info) => {
+                //alert(info.arr + " " + info.pos + " " + info.img);
+                $("body").append(makebutton(info));
+            });
+        }
+        if (arrowpos[background]) {
+            arrowpos[background].forEach((info) => {
+                $("body").append(makearrow(info));
+            });
+        }
+        if (page == "squashroom") {
+            makemodal("gamedesc");
+        }
+    }
     /*
 
 
@@ -111,65 +146,71 @@ $(document).ready(function () {
     */
     const pos = [
         {
-            leftX: 340,
-            rightX: 405,
-            upY: 100,
-            lowY: 170,
+            X: 12,
+            Y: 21,
         },
         {
-            leftX: 960,
-            rightX: 1050,
-            upY: 365,
-            lowY: 450,
+            X: 48,
+            Y: 62,
         },
         {
-            leftX: 550,
-            rightX: 650,
-            upY: 245,
-            lowY: 320,
+            X: 33,
+            Y: 35,
         },
         {
-            leftX: 900,
-            rightX: 1000,
-            upY: 100,
-            lowY: 250,
+            X: 20,
+            Y: 60,
         },
     ];
     function makegame() {
+        if (gamesolved == true) {
+            changepage("squash");
+            return;
+        }
         changepage("game");
         let now = 0;
-        let x;
-        let y;
-        let top = (pos[now].upY + pos[now].lowY) / 2;
-        let left = (pos[now].leftX + pos[now].rightX) / 2;
         let gamebutton = {
-            pos: "top:" + top + ";left:" + left,
+            arr: "game",
+            pos: "top:" + pos[now].X + "%;left:" + pos[now].Y + "%;",
             img: "img/gamebutton.png",
         };
         //alert(gamebutton.pos + " " + gamebutton.img);
-        makebutton(gamebutton);
+        $("body").append(makebutton(gamebutton));
+        $(document).on("click", ".button", function (e) {
+            if (page != "game") return;
+            x = e.pageX;
+            y = e.pageY;
+            if (now == 3) {
+                makemodal("gethint");
+                now = 0;
+                $(".button").remove();
+                return;
+            }
+            $(".button").remove();
+            now += 1;
+            let gamebutton = {
+                arr: "game",
+                pos: "top:" + pos[now].X + "%;left:" + pos[now].Y + "%;",
+                img: "img/gamebutton.png",
+            };
+            if (gamesolved == true) {
+                makemodal("gethint");
+                now = 0;
+                $(".button").remove();
+                return;
+            }
+            $("body").append(makebutton(gamebutton));
+        });
         $(document).on("click", function (e) {
             x = e.pageX;
             y = e.pageY;
-            if (
-                pos[now].leftX <= x &&
-                x <= pos[now].rightX &&
-                pos[now].upY <= y &&
-                y <= pos[now].lowY
-            ) {
-                //alert(x + " " + y);
-                if (now == 3) {
-                    makemodal("gethint");
-                    $(".button").remove();
-                    return;
-                }
-                $(".button").remove();
-                now += 1;
-            }
         });
     }
     function makemodal(modalname) {
         const c = Mod[modalname];
+        if (modalname == "gethint") {
+            //(page);
+        }
         nowmodal = modalname;
         $(".button").hide();
         $("#foreground").show();
@@ -202,10 +243,11 @@ $(document).ready(function () {
                 makegame();
             }
             if (nowmodal == "gethint") {
-                gamesolved = 1;
+                gamesolved = true;
                 localStorage.setItem("game", 1);
                 changepage("squash");
             }
+            //alert(nowmodal);
         }
     });
     /*
@@ -219,42 +261,8 @@ $(document).ready(function () {
 
 
     */
-
-    function makearrow(info) {
-        return `<img class="arrow ${info.arr}" style="${info.pos} ${info.rot}" src="img/arrow.png">`;
-    }
-    function makebutton(info) {
-        return `<img class="button ${info.arr}" style="${info.pos} ${info.rot}" src="${info.img}">`;
-    }
-    function changepage(background) {
-        page = background;
-        $("#background").prop("src", "background/" + page + ".jpg");
-        $(".button").remove();
-        $(".arrow").remove();
-        if (buttonpos[background]) {
-            buttonpos[background].forEach((info) => {
-                $("body").append(makebutton(info));
-            });
-        }
-        if (arrowpos[background]) {
-            arrowpos[background].forEach((info) => {
-                $("body").append(makearrow(info));
-            });
-        }
-        if (page == "squashroom") {
-            makemodal("gamedesc");
-        }
-    }
-    /*
-
-
-
-
-
-
-
-    */
     $(document).on("click", ".button", function (e) {
+        if (page == "game") return;
         let myclass = $(this).attr("class").split(" ")[1];
         if (myclass == "balls") {
             if (gamesolved == true) {
@@ -285,6 +293,9 @@ $(document).ready(function () {
             if (isracket != true) {
                 makemodal("noracket");
                 return;
+            }
+            if (gamesolved == true) {
+                makemodal();
             }
         }
         changepage(myclass);
