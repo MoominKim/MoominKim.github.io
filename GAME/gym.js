@@ -2,7 +2,6 @@ $(document).ready(() => {
     let babelsolved = localStorage.getItem("babel");
     let chairsolved = localStorage.getItem("chair");
     let runsolved = localStorage.getItem("run");
-    localStorage.clear();
     let page;
     localStorage.setItem("start", "tenis");
     chairsolved = "true";
@@ -310,5 +309,5 @@ $(document).ready(() => {
         localStorage.setItem("start", "tenis");
         location.href = "tenis.html";
     });
-    changepage("run");
+    changepage("gym");
 });

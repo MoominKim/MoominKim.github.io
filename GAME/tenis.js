@@ -6,6 +6,7 @@ $(document).ready(function () {
     let ralysolved = localStorage.getItem("raly");
     let consolesolved = localStorage.getItem("console");
     let lacketsolved = localStorage.getItem("lacket");
+    //localStorage.clear();
     $("#foreground").hide();
     const arrowpos = {
         tenis: [
@@ -84,7 +85,7 @@ $(document).ready(function () {
         ralyfocus: [
             {
                 arr: "table",
-                pos: "top:55%;left:20%;",
+                pos: "top:55%;left:20%;opacity: 1;",
                 img: "img/table.png",
             },
             {
@@ -96,28 +97,21 @@ $(document).ready(function () {
         cabinfocus: [
             {
                 arr: "cabinlock",
-                pos: "top:1%;left:1%;",
+                pos: "top:1%;left:25%;",
                 img: "img/button16.png",
             },
         ],
         cabinlock: [
             {
                 arr: "cabinopen",
-                pos: "top:10%;left:32%;",
+                pos: "top:10%;left:32%;opacity:1;",
                 img: "img/goldencircle.png",
-            },
-        ],
-        ralyconsole: [
-            {
-                arr: "consoleproblem",
-                pos: "top:1%;left:1%;",
-                img: "img/button17.png",
             },
         ],
         rackets: [
             {
                 arr: "racket",
-                pos: "top:40%;left:50%;",
+                pos: "top:27%;left:29.5%;width:27vh;",
                 img: "img/button17.png",
             },
         ],
@@ -214,6 +208,7 @@ $(document).ready(function () {
             if (nowmodal == "ralyin") {
                 ralysolved = "true";
                 localStorage.setItem("raly", true);
+                changepage("cabinralyfocus");
             }
             if (nowmodal == "lockhint") {
                 locksolved = "true";
@@ -253,23 +248,34 @@ $(document).ready(function () {
     }
     function changepage(background) {
         page = background;
-        $("#background").prop("src", "background/" + page + ".jpg");
+        if (page == "cabinlock" && locksolved == "true") {
+            $("#background").prop("src", "background/" + page + "2.jpg");
+        } else {
+            $("#background").prop("src", "background/" + page + ".jpg");
+        }
         $(".button").remove();
         $(".arrow").remove();
+        if (arrowpos[background]) {
+            arrowpos[background].forEach((info) => {
+                $("body").append(makearrow(info));
+            });
+        }
         if (buttonpos[background]) {
+            if (ralysolved == "true" && page == "ralyfocus") {
+                return;
+            }
             buttonpos[background].forEach((info) => {
+                if (page == "cabinlock" && locksolved == "true") {
+                    info.pos = "top:10%;left:32%;opacity:0;";
+                }
                 if (info.arr == "table" && consolesolved != "true") {
-                    info.img = "img/button14.png";
+                    info.pos = "top:5%;left:11%;";
+                    info.img = "img/button100.png";
                 }
                 $("body").append(makebutton(info));
                 if (info.arr == "table" && consolesolved != "true") {
                     info.img = "img/table.png";
                 }
-            });
-        }
-        if (arrowpos[background]) {
-            arrowpos[background].forEach((info) => {
-                $("body").append(makearrow(info));
             });
         }
         if (page == "ralyconsole") {
