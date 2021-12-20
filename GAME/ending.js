@@ -115,7 +115,7 @@ $(document).ready(function () {
 
     */
     function makeball() {
-        return `<img id="ending" src="img/button14.png">`;
+        return `<img id="ending" src="img/S.png">`;
     }
     $(document).on("click", ".button", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];

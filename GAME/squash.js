@@ -120,7 +120,16 @@ $(document).ready(function () {
             makegame();
             return;
         }
-        $("#background").prop("src", "background/" + page + ".jpg");
+        if (page == "squashin" && gamesolved == "true") {
+            if (angrysolved == "true") {
+                $("#background").prop("src", "background/" + page + ".jpg");
+            } else {
+                $("#background").prop("src", "background/" + page + "2.jpg");
+            }
+        } else {
+            $("#background").prop("src", "background/" + page + ".jpg");
+        }
+
         $("#ball").remove();
         $(".button").remove();
         $(".arrow").remove();
@@ -301,6 +310,7 @@ $(document).ready(function () {
                 makemodal("getrelic");
                 angrysolved = "true";
                 localStorage.setItem("angry", true);
+                changepage("squash");
                 return;
             }
             if (isball == "true") {
