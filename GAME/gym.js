@@ -2,9 +2,9 @@ $(document).ready(() => {
     let babelsolved = localStorage.getItem("babel");
     let chairsolved = localStorage.getItem("chair");
     let runsolved = localStorage.getItem("run");
+    let nowspeed = 1;
     let page;
     localStorage.setItem("start", "tenis");
-    chairsolved = "true";
     $("#foreground").hide();
     const arrowpos = {
         gym: [

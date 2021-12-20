@@ -197,7 +197,12 @@ $(document).ready(function () {
             now += 1;
             let gamebutton = {
                 arr: "game",
-                pos: "top:" + pos[now].X + "%;left:" + pos[now].Y + "%;",
+                pos:
+                    "top:" +
+                    pos[now].X +
+                    "%;left:" +
+                    pos[now].Y +
+                    "%;opacity:1;",
                 img: "img/gamebutton.png",
             };
             if (gamesolved == "true") {
