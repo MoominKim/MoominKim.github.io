@@ -6,7 +6,7 @@ $(document).ready(function () {
     let ralysolved = localStorage.getItem("raly");
     let consolesolved = localStorage.getItem("console");
     let lacketsolved = localStorage.getItem("lacket");
-    //localStorage.clear();
+    localStorage.clear();
     $("#foreground").hide();
     const arrowpos = {
         tenis: [
@@ -262,6 +262,9 @@ $(document).ready(function () {
         }
         if (buttonpos[background]) {
             if (ralysolved == "true" && page == "ralyfocus") {
+                return;
+            }
+            if (locksolved != "true" && page == "rackets") {
                 return;
             }
             buttonpos[background].forEach((info) => {

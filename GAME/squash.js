@@ -72,12 +72,12 @@ $(document).ready(function () {
         },
         noracket: {
             name: "ㅠㅠ",
-            desc: "스쿼시 라켓이 없다..",
+            desc: "스쿼시실 안에 빛나는 부분이 보이지만 어떻게 닿아야 할지 모르겠다...",
             id: "noracket",
         },
         noball: {
             name: "ㅠㅠ",
-            desc: "스쿼시 공이 없다..",
+            desc: "스쿼시실 안에 빛나는 부분이 보이지만 어떻게 닿아야 할지 모르겠다...",
             id: "noball",
         },
         hasracket: {
@@ -89,11 +89,6 @@ $(document).ready(function () {
             name: "?",
             desc: "이미 공이 있다",
             id: "hasball",
-        },
-        gamedesc: {
-            name: "!",
-            desc: "반짝이는 곳을 공으로 맞춰라!",
-            id: "gamedesc",
         },
         gethint: {
             name: "의문의 분노가 차오른다",
@@ -122,6 +117,10 @@ $(document).ready(function () {
     function changepage(background) {
         //alert(background);
         page = background;
+        if (background == "squashroom") {
+            makegame();
+            return;
+        }
         $("#background").prop("src", "background/" + page + ".jpg");
         $("#ball").remove();
         $(".button").remove();
@@ -136,9 +135,6 @@ $(document).ready(function () {
             arrowpos[background].forEach((info) => {
                 $("body").append(makearrow(info));
             });
-        }
-        if (page == "squashroom") {
-            makemodal("gamedesc");
         }
     }
     /*
@@ -183,7 +179,7 @@ $(document).ready(function () {
         let now = 0;
         let gamebutton = {
             arr: "game",
-            pos: "top:" + pos[now].X + "%;left:" + pos[now].Y + "%;",
+            pos: "top:" + pos[now].X + "%;left:" + pos[now].Y + "%;opacity:1;",
             img: "img/gamebutton.png",
         };
         var $ball = $("#ball");
@@ -266,9 +262,6 @@ $(document).ready(function () {
             if (nowmodal == "getracket") {
                 isracket = "true";
                 localStorage.setItem("racket", true);
-            }
-            if (nowmodal == "gamedesc") {
-                makegame();
             }
             if (nowmodal == "gethint") {
                 gamesolved = "true";
