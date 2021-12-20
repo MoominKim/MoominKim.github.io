@@ -4,8 +4,8 @@ $(document).ready(() => {
     let runsolved = localStorage.getItem("run");
     localStorage.clear();
     let page;
-    let nowspeed = 1;
     localStorage.setItem("start", "tenis");
+    chairsolved = "true";
     $("#foreground").hide();
     const arrowpos = {
         gym: [
@@ -95,7 +95,11 @@ $(document).ready(() => {
             { arr: "modal", pos: "top:65%;left:49%;", img: "img/button10.png" },
         ],
         run: [
-            { arr: "onrun", pos: "top:50%;left:59%;", img: "img/button11.png" },
+            {
+                arr: "onrun",
+                pos: "top:45.7%;left:57.3%;opacity:1;",
+                img: "img/onrun.png",
+            },
         ],
         onrun: [
             {
@@ -306,5 +310,5 @@ $(document).ready(() => {
         localStorage.setItem("start", "tenis");
         location.href = "tenis.html";
     });
-    changepage("gym");
+    changepage("run");
 });
