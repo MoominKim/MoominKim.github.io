@@ -180,6 +180,7 @@ $(document).ready(function () {
             if (page != "game") return;
             x = e.pageX;
             y = e.pageY;
+
             if (now == 3) {
                 makemodal("gethint");
                 now = 0;

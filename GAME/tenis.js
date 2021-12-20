@@ -65,7 +65,7 @@ $(document).ready(function () {
             },
             {
                 arr: "cabinfocus",
-                pos: "top : 5.5%;left: 14%;height:65vh;width:45vh;",
+                pos: "top : 5.5%;left: 14%;height:65vh;width:40vh;",
                 img: "img/cabinfocus.png",
             },
         ],
