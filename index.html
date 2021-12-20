@@ -1,72 +1,14 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
-        <style>
-            #info {
-                border: 1px solid #cccccc;
-                width: 500px;
-                height: 50px;
-                margin: 30px;
-            }
-
-            #panel {
-                position: absolute;
-                border: 1px solid #cccccc;
-                width: 500px;
-                height: 300px;
-                margin: 0 30px 0 30px;
-            }
-
-            #fish {
-                position: absolute;
-                left: 0;
-                top: 0;
-            }
-        </style>
-        <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                var $fish = $("#fish");
-                var $panel = $("#panel");
-
-                $("#panel").click(function (e) {
-                    var output = "";
-                    var panel_x = $panel.offset().left;
-                    var panel_y = $panel.offset().top;
-
-                    output +=
-                        "클릭한 지역 위치(x, y) = " +
-                        e.clientX +
-                        ", " +
-                        e.clientY +
-                        "<br>";
-                    output +=
-                        "문서 기준 위치(x, y) = " + e.pageX + ", " + e.pageY;
-
-                    $fish.animate(
-                        {
-                            // stop()을 넣어주면 애니메이션 도중에 다른 애니메이션을 실행시킬 수 있다.
-                            left: e.clientX - panel_x,
-                            top: e.clientY - panel_y,
-                        },
-                        1000 //,
-                        //"easeOutExpo"
-                    );
-
-                    $("#info").html(output);
-                });
-            });
-        </script>
+        <link rel="stylesheet" href="../common.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
-
     <body>
-        <div id="info">여기에 클릭한 위치 값 출력</div>
-
-        <div id="panel">
-            <img src="GAME/img/button14.png" id="fish" />
-        </div>
+        <a href="GAME/start.html">hello world!</a>
     </body>
 </html>

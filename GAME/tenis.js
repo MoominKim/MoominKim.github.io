@@ -11,6 +11,11 @@ $(document).ready(function () {
         tenis: [
             {
                 arr: "gym",
+                pos: "bottom:0%; right: 1%;",
+                rot: "transform: rotate( 90deg );",
+            },
+            {
+                arr: "squash",
                 pos: "bottom:0%; left: 1%;",
                 rot: "transform: rotate( -90deg );",
             },
@@ -32,6 +37,13 @@ $(document).ready(function () {
         cabinfocus: [
             {
                 arr: "cabinralyfocus",
+                pos: "bottom:0%; left: 1%;",
+                rot: "transform: rotate( -90deg );",
+            },
+        ],
+        ralyconsole: [
+            {
+                arr: "ralyfocus",
                 pos: "bottom:0%; left: 1%;",
                 rot: "transform: rotate( -90deg );",
             },
@@ -200,12 +212,12 @@ $(document).ready(function () {
                 makemodal("problem");
             }
             if (nowmodal == "ralyin") {
-                ralysolved = true;
-                localStorage.setItem("raly", 1);
+                ralysolved = "true";
+                localStorage.setItem("raly", true);
             }
             if (nowmodal == "lockhint") {
-                locksolved = true;
-                localStorage.setItem("lock", 1);
+                locksolved = "true";
+                localStorage.setItem("lock", true);
                 changepage("cabinlock");
             }
             if (nowmodal == "cantfind") {
@@ -213,8 +225,8 @@ $(document).ready(function () {
             }
             if (nowmodal == "getlacket") {
                 changepage("tenis");
-                localStorage.setItem("lacket", 1);
-                lacketsolved = 1;
+                lacketsolved = "true";
+                localStorage.setItem("lacket", true);
             }
             if (nowmodal == "opendoor") {
                 changepage("cabinopen");
@@ -246,11 +258,11 @@ $(document).ready(function () {
         $(".arrow").remove();
         if (buttonpos[background]) {
             buttonpos[background].forEach((info) => {
-                if (info.arr == "table" && consolesolved != true) {
+                if (info.arr == "table" && consolesolved != "true") {
                     info.img = "img/button14.png";
                 }
                 $("body").append(makebutton(info));
-                if (info.arr == "table" && consolesolved != true) {
+                if (info.arr == "table" && consolesolved != "true") {
                     info.img = "img/table.png";
                 }
             });
@@ -279,7 +291,7 @@ $(document).ready(function () {
     $(document).on("click", ".button", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
         if (page == "rackets") {
-            if (locksolved == true) {
+            if (locksolved == "true") {
                 makemodal("getlacket");
                 return;
             } else {
@@ -288,10 +300,10 @@ $(document).ready(function () {
             }
         }
         if (page == "cabinlock") {
-            if (locksolved == true) {
+            if (locksolved == "true") {
                 makemodal("cleared");
                 return;
-            } else if (ralysolved == true) {
+            } else if (ralysolved == "true") {
                 makemodal("opendoor");
                 return;
             } else {
@@ -300,21 +312,25 @@ $(document).ready(function () {
             }
         }
         if (myclass == "table") {
-            if (consolesolved != true) {
+            if (ralysolved == "true") {
+                makemodal("cleared");
+                return;
+            }
+            if (consolesolved != "true") {
                 makemodal("describe");
                 return;
             }
-            if (consolesolved == true) {
+            if (consolesolved == "true") {
                 makemodal("ralyin");
                 return;
             }
-            if (ralysolved == true) {
+            if (ralysolved == "true") {
                 makemodal("cleared");
                 return;
             }
         }
         if (page == "ralyconsole") {
-            if (ralysolved == true) {
+            if (ralysolved == "true") {
                 makemodal("cleared");
                 return;
             } else {
@@ -322,7 +338,7 @@ $(document).ready(function () {
                 return;
             }
         }
-        if (myclass == "rackets" && lacketsolved == true) {
+        if (myclass == "rackets" && lacketsolved == "true") {
             makemodal("cleared");
             return;
         }
@@ -331,6 +347,7 @@ $(document).ready(function () {
     $(document).on("click", ".arrow", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
         if (myclass == "gym") location.href = "gym.html";
+        if (myclass == "squash") location.href = "squash.html";
         else changepage(myclass);
     });
     changepage(page);

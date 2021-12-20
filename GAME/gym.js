@@ -4,6 +4,7 @@ $(document).ready(() => {
     let runsolved = localStorage.getItem("run");
     let page;
     let nowspeed = 1;
+    localStorage.setItem("start", "tenis");
     $("#foreground").hide();
     const arrowpos = {
         gym: [
@@ -192,19 +193,19 @@ $(document).ready(() => {
             $("#foreground").hide();
             $(".button").show();
             if (page == "openchair") {
-                chairsolved = true;
-                localStorage.setItem("chair", 1);
+                chairsolved = "true";
+                localStorage.setItem("chair", true);
                 changepage("gym");
             }
             if (page == "dead") {
-                babelsolved = true;
-                localStorage.setItem("babel", 1);
+                babelsolved = "true";
+                localStorage.setItem("babel", true);
                 changepage("gym");
             }
             if (page == "onrun" && nowspeed == 1) changepage("onrun");
             if (page == "onrun" && nowspeed == 3) {
-                runsolved = true;
-                localStorage.setItem("run", 1);
+                runsolved = "true";
+                localStorage.setItem("run", true);
                 changepage("gym");
             }
         }
@@ -216,7 +217,7 @@ $(document).ready(() => {
         changepage("gym");
     });
     $(document).on("click", ".gymchair", () => {
-        if (chairsolved) makemodal("cleared");
+        if (chairsolved == "true") makemodal("cleared");
         else changepage("gymchair");
     });
     $(document).on("click", ".chairpuzzle", () => {
@@ -237,8 +238,8 @@ $(document).ready(() => {
         if (".openchair") makemodal("chair");
     });
     $(document).on("click", ".run", () => {
-        if (runsolved == true) makemodal("cleared");
-        else if (chairsolved == true) changepage("run");
+        if (runsolved == "true") makemodal("cleared");
+        else if (chairsolved == "true") changepage("run");
         else makemodal("notnow");
     });
     $(document).on("click", ".onrun", () => {
@@ -251,9 +252,9 @@ $(document).ready(() => {
         changespeed(false);
     });
     $(document).on("click", ".dead", () => {
-        if (babelsolved == true) {
+        if (babelsolved == "true") {
             makemodal("cleared");
-        } else if (runsolved == true) {
+        } else if (runsolved == "true") {
             changepage("dead");
         } else {
             makemodal("notnow");

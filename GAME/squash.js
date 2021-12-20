@@ -4,6 +4,8 @@ $(document).ready(function () {
     let isball = localStorage.getItem("ball");
     let isracket = localStorage.getItem("racket");
     let gamesolved = localStorage.getItem("game");
+    let angrysolved = localStorage.getItem("angry");
+    localStorage.setItem("start", "tenis");
     $("#foreground").hide();
     const arrowpos = {
         squash: [
@@ -11,6 +13,11 @@ $(document).ready(function () {
                 arr: "start",
                 pos: "bottom:0%; left: 1%;",
                 rot: "transform: rotate( -90deg );",
+            },
+            {
+                arr: "tenis",
+                pos: "bottom:0%; right: 1%;",
+                rot: "transform: rotate( 90deg );",
             },
         ],
         squashin: [
@@ -167,7 +174,7 @@ $(document).ready(function () {
         return `<img id="ball" src="img/button14.png">`;
     }
     function makegame() {
-        if (gamesolved == true) {
+        if (gamesolved == "true") {
             changepage("squash");
             return;
         }
@@ -198,7 +205,7 @@ $(document).ready(function () {
                 pos: "top:" + pos[now].X + "%;left:" + pos[now].Y + "%;",
                 img: "img/gamebutton.png",
             };
-            if (gamesolved == true) {
+            if (gamesolved == "true") {
                 makemodal("gethint");
                 now = 0;
                 $(".button").remove();
@@ -253,18 +260,18 @@ $(document).ready(function () {
             $("#foreground").hide();
             $(".button").show();
             if (nowmodal == "getball") {
-                isball = true;
-                localStorage.setItem("ball", 1);
+                isball = "true";
+                localStorage.setItem("ball", true);
             }
             if (nowmodal == "getracket") {
-                isracket = true;
-                localStorage.setItem("racket", 1);
+                isracket = "true";
+                localStorage.setItem("racket", true);
             }
             if (nowmodal == "gamedesc") {
                 makegame();
             }
             if (nowmodal == "gethint") {
-                gamesolved = true;
+                gamesolved = "true";
                 localStorage.setItem("game", true);
                 changepage("squash");
             }
@@ -286,20 +293,28 @@ $(document).ready(function () {
         if (page == "game") return;
         let myclass = $(this).attr("class").split(" ")[1];
         if (myclass == "balls") {
-            if (gamesolved == true) {
-                makemodal("getrelic");
+            if (angrysolved == "true") {
+                makemodal("cleared");
                 return;
             }
-            if (isball == true) {
-                makemodal("hasball");
+            if (gamesolved == "true") {
+                makemodal("getrelic");
+                angrysolved = "true";
+                localStorage.setItem("angry", true);
+                return;
             }
-            if (isball != true) {
+            if (isball == "true") {
+                makemodal("hasball");
+                return;
+            }
+            if (isball != "true") {
                 makemodal("getball");
+                return;
             }
             return;
         }
         if (myclass == "rackets") {
-            if (isracket == true) {
+            if (isracket == "true") {
                 makemodal("hasracket");
             } else {
                 makemodal("getracket");
@@ -307,14 +322,15 @@ $(document).ready(function () {
             return;
         }
         if (myclass == "squashroom") {
-            if (gamesolved == true) {
+            if (gamesolved == "true") {
                 makemodal("cleared");
+                return;
             }
-            if (isball != true) {
+            if (isball != "true") {
                 makemodal("noball");
                 return;
             }
-            if (isracket != true) {
+            if (isracket != "true") {
                 makemodal("noracket");
                 return;
             }
@@ -323,12 +339,7 @@ $(document).ready(function () {
     });
     $(document).on("click", ".arrow", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
-        if (myclass == "start") {
-            location.href = "start.html";
-            return;
-        }
-        changepage(myclass);
+        location.href = myclass + ".html";
     });
-    //changepage("squash");
-    makegame();
+    changepage("squash");
 });
