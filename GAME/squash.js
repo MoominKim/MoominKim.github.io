@@ -116,6 +116,7 @@ $(document).ready(function () {
         //alert(background);
         page = background;
         $("#background").prop("src", "background/" + page + ".jpg");
+        $("#ball").remove();
         $(".button").remove();
         $(".arrow").remove();
         if (buttonpos[background]) {
@@ -162,29 +163,32 @@ $(document).ready(function () {
             Y: 60,
         },
     ];
+    function makeball() {
+        return `<img id="ball" src="img/button14.png">`;
+    }
     function makegame() {
         if (gamesolved == true) {
             changepage("squash");
             return;
         }
         changepage("game");
+        $("body").append(makeball());
         let now = 0;
         let gamebutton = {
             arr: "game",
             pos: "top:" + pos[now].X + "%;left:" + pos[now].Y + "%;",
             img: "img/gamebutton.png",
         };
-        //alert(gamebutton.pos + " " + gamebutton.img);
+        var $ball = $("#ball");
+        //alert(background);
         $("body").append(makebutton(gamebutton));
         $(document).on("click", ".button", function (e) {
             if (page != "game") return;
-            x = e.pageX;
-            y = e.pageY;
-
             if (now == 3) {
+                $("#ball").remove();
+                $(".button").remove();
                 makemodal("gethint");
                 now = 0;
-                $(".button").remove();
                 return;
             }
             $(".button").remove();
@@ -203,8 +207,24 @@ $(document).ready(function () {
             $("body").append(makebutton(gamebutton));
         });
         $(document).on("click", function (e) {
-            x = e.pageX;
-            y = e.pageY;
+            if (page != "game") {
+                $("#ball").remove();
+                return;
+            }
+            var $ball = $("#ball");
+            $ball.animate(
+                {
+                    // stop()을 넣어주면 애니메이션 도중에 다른 애니메이션을 실행시킬 수 있다.
+                    left: e.clientX,
+                    top: e.clientY,
+                    width: "10%",
+                },
+                1000,
+                function () {
+                    $("#ball").remove();
+                    $("body").append(makeball());
+                }
+            );
         });
     }
     function makemodal(modalname) {
@@ -245,7 +265,7 @@ $(document).ready(function () {
             }
             if (nowmodal == "gethint") {
                 gamesolved = true;
-                localStorage.setItem("game", 1);
+                localStorage.setItem("game", true);
                 changepage("squash");
             }
             //alert(nowmodal);
@@ -287,6 +307,9 @@ $(document).ready(function () {
             return;
         }
         if (myclass == "squashroom") {
+            if (gamesolved == true) {
+                makemodal("cleared");
+            }
             if (isball != true) {
                 makemodal("noball");
                 return;
@@ -294,9 +317,6 @@ $(document).ready(function () {
             if (isracket != true) {
                 makemodal("noracket");
                 return;
-            }
-            if (gamesolved == true) {
-                makemodal();
             }
         }
         changepage(myclass);
@@ -309,6 +329,6 @@ $(document).ready(function () {
         }
         changepage(myclass);
     });
-    changepage("squash");
-    //makegame();
+    //changepage("squash");
+    makegame();
 });

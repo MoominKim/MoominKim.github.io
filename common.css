@@ -55,3 +55,10 @@
     font-weight: 900;
     cursor: pointer;
 }
+
+#ball {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    width: 30%;
+}
