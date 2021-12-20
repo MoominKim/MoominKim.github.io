@@ -48,7 +48,7 @@ $(document).ready(function () {
         tenis: [
             {
                 arr: "cabinralyfocus",
-                pos: "top:29.5%;left:43.5%;height:23vh;width:40vh;",
+                pos: "top:29.5%;left:43.5%;height:23vh;width:35vh;",
                 img: "img/cabinralyfocus.png",
             },
             {
@@ -60,7 +60,7 @@ $(document).ready(function () {
         cabinralyfocus: [
             {
                 arr: "ralyfocus",
-                pos: "top:23%;left:30%;height:77vh;width:143vh;",
+                pos: "top:23.5%;left:30%;height:76vh;width:124vh;",
                 img: "img/ralyfocus.png",
             },
             {
@@ -77,7 +77,7 @@ $(document).ready(function () {
             },
             {
                 arr: "ralyconsole",
-                pos: "top:54%;left:0%;",
+                pos: "top:52%;left:0%;height:20vh;width:20vh;",
                 img: "img/ralyconsole.png",
             },
         ],
