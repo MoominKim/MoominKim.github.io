@@ -76,6 +76,11 @@ $(document).ready(function () {
                 pos: "bottom:13.5%;left:0%;height:21vh;width:15vw;",
                 img: "img/rackets.png",
             },
+            {
+                arr: "button14",
+                pos: "bottom:50%;right:5%;",
+                img: "img/button14.png",
+            },
         ],
         cabinralyfocus: [
             {
@@ -143,6 +148,11 @@ $(document).ready(function () {
             name: "랠리머신이다",
             desc: "아무것도 올라와 있지 않다..",
             id: "describe",
+        },
+        button14: {
+            name: "이스터에그 버튼14",
+            desc: "이 게임이 그래픽이란 것을 가지기 전에 존재했던 태초의 생명체",
+            id: "button14",
         },
         ralyin: {
             name: "랠리머신이다",
@@ -356,6 +366,10 @@ $(document).ready(function () {
         }
         if (myclass == "rackets" && lacketsolved == "true") {
             makemodal("cleared");
+            return;
+        }
+        if (myclass == "button14") {
+            makemodal("button14");
             return;
         }
         changepage(myclass);
