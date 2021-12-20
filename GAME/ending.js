@@ -114,13 +114,30 @@ $(document).ready(function () {
 
 
     */
+    function makeball() {
+        return `<img id="ending" src="img/button14.png">`;
+    }
     $(document).on("click", ".button", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
         if (babel == "true" && lacket == "true" && angry == "true") {
+            $("body").append(makeball());
+            var $ball = $("#ending");
+            $ball.animate(
+                {
+                    // stop()을 넣어주면 애니메이션 도중에 다른 애니메이션을 실행시킬 수 있다.
+                    width: "100%",
+                    height: "100%",
+                },
+                1000
+            );
+            localStorage.clear();
         } else {
             makemodal("notnow");
             return;
         }
+    });
+    $(document).on("click", "#ending", function (e) {
+        location.href = "start.html";
     });
     $(document).on("click", ".arrow", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];

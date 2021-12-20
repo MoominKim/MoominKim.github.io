@@ -16,7 +16,7 @@ $(document).ready(function () {
                 rot: "transform: rotate( 90deg );",
             },
             {
-                arr: "squash",
+                arr: "ending",
                 pos: "bottom:0%; left: 1%;",
                 rot: "transform: rotate( -90deg );",
             },
@@ -52,6 +52,13 @@ $(document).ready(function () {
         cabinlock: [
             {
                 arr: "cabinfocus",
+                pos: "bottom:0%; left: 1%;",
+                rot: "transform: rotate( -90deg );",
+            },
+        ],
+        rackets: [
+            {
+                arr: "tenis",
                 pos: "bottom:0%; left: 1%;",
                 rot: "transform: rotate( -90deg );",
             },
@@ -356,7 +363,7 @@ $(document).ready(function () {
     $(document).on("click", ".arrow", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
         if (myclass == "gym") location.href = "gym.html";
-        if (myclass == "squash") location.href = "squash.html";
+        if (myclass == "ending") location.href = "ending.html";
         else changepage(myclass);
     });
     changepage(page);
