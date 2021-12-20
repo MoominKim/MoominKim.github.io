@@ -212,7 +212,7 @@ $(document).ready(() => {
 
     function changespeed(isup) {
         if (isup) {
-            if (nowspeed == 3) makemodal("overspeed");
+            if (nowspeed == 4) makemodal("overspeed");
             else {
                 $("#background").prop(
                     "src",

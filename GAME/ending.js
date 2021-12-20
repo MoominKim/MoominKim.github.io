@@ -2,6 +2,7 @@ $(document).ready(function () {
     let babel = localStorage.getItem("babel");
     let angry = localStorage.getItem("angry");
     let lacket = localStorage.getItem("lacket");
+    babel = angry = lacket = "true";
     localStorage.setItem("start", "tenis");
     //localStorage.clear();
     $("#foreground").hide();
@@ -125,6 +126,8 @@ $(document).ready(function () {
             $ball.animate(
                 {
                     // stop()을 넣어주면 애니메이션 도중에 다른 애니메이션을 실행시킬 수 있다.
+                    bottom: "0px",
+                    left: "0px",
                     width: "100%",
                     height: "100%",
                 },

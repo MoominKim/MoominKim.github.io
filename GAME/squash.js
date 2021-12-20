@@ -284,6 +284,11 @@ $(document).ready(function () {
                 localStorage.setItem("game", true);
                 changepage("squash");
             }
+            if (nowmodal == "getrelic") {
+                angrysolved = "true";
+                localStorage.setItem("angry", true);
+                changepage("squash");
+            }
             //alert(nowmodal);
         }
     });
@@ -308,9 +313,6 @@ $(document).ready(function () {
             }
             if (gamesolved == "true") {
                 makemodal("getrelic");
-                angrysolved = "true";
-                localStorage.setItem("angry", true);
-                changepage("squash");
                 return;
             }
             if (isball == "true") {
