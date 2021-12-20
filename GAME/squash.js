@@ -166,7 +166,7 @@ $(document).ready(function () {
         },
     ];
     function makeball() {
-        return `<img id="ball" src="img/button14.png">`;
+        return `<div id="ball"></div>`;
     }
     function makegame() {
         if (gamesolved == "true") {
@@ -218,20 +218,23 @@ $(document).ready(function () {
                 $("#ball").remove();
                 return;
             }
+            //$("#foreground").show();
             var $ball = $("#ball");
             $ball.animate(
                 {
                     // stop()을 넣어주면 애니메이션 도중에 다른 애니메이션을 실행시킬 수 있다.
                     left: e.clientX,
                     top: e.clientY,
-                    width: "10%",
+                    width: "1%",
+                    height: "1%",
                 },
-                1000,
+                500,
                 function () {
                     $("#ball").remove();
                     $("body").append(makeball());
                 }
             );
+            //$("#foreground").hide();
         });
     }
     function makemodal(modalname) {
