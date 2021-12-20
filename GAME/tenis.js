@@ -103,7 +103,7 @@ $(document).ready(function () {
         cabinlock: [
             {
                 arr: "cabinopen",
-                pos: "top:10%;left:35%;",
+                pos: "top:10%;left:32%;",
                 img: "img/goldencircle.png",
             },
         ],

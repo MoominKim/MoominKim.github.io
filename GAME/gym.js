@@ -38,16 +38,20 @@ $(document).ready(() => {
         /*key:value*/
         start: [],
         gym: [
-            { arr: "run", pos: "top:32%;left:28%;", img: "img/러닝머신.png" },
+            {
+                arr: "run",
+                pos: "top:12%;left:25.5%;height:88vh;width:125vh;",
+                img: "img/run.png",
+            },
             {
                 arr: "dead",
-                pos: "top:24%;left:22%;",
-                img: "img/상체운동머신.png",
+                pos: "top:20%;left:20%;height:30vh;width:32vh;",
+                img: "img/dead.png",
             },
             {
                 arr: "gymchair",
-                pos: "top:31%;left:2%;",
-                img: "img/다리운동기계.png",
+                pos: "top:26.5%;left:0%;width:40vh;height:48vh;",
+                img: "img/gymchair.png",
             },
         ],
         gymchair: [
@@ -91,7 +95,11 @@ $(document).ready(() => {
             },
         ],
         dead: [
-            { arr: "babel", pos: "top:15%;left:8%;", img: "img/button13.png" },
+            {
+                arr: "babel",
+                pos: "top:6%;left:2.2%;height:90vh;width:132vh;",
+                img: "img/babel.png",
+            },
         ],
     };
 
@@ -156,6 +164,14 @@ $(document).ready(() => {
         $("#background").prop("src", "background/" + page + ".jpg");
         $(".button").remove();
         $(".arrow").remove();
+        if (page == "run" && chairsolved != "true") {
+            if (arrowpos[background]) {
+                arrowpos[background].forEach((info) => {
+                    $("body").append(makearrow(info));
+                });
+            }
+            return;
+        }
         if (buttonpos[background]) {
             buttonpos[background].forEach((info) => {
                 $("body").append(makebutton(info));
@@ -238,9 +254,11 @@ $(document).ready(() => {
         if (".openchair") makemodal("chair");
     });
     $(document).on("click", ".run", () => {
-        if (runsolved == "true") makemodal("cleared");
-        else if (chairsolved == "true") changepage("run");
-        else makemodal("notnow");
+        if (runsolved == "true") {
+            makemodal("cleared");
+            return;
+        }
+        changepage("run");
     });
     $(document).on("click", ".onrun", () => {
         changepage("onrun");
@@ -267,5 +285,5 @@ $(document).ready(() => {
         localStorage.setItem("start", "tenis");
         location.href = "tenis.html";
     });
-    changepage("gym");
+    changepage("onrun");
 });
