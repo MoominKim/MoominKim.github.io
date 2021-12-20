@@ -2,6 +2,7 @@ $(document).ready(() => {
     let babelsolved = localStorage.getItem("babel");
     let chairsolved = localStorage.getItem("chair");
     let runsolved = localStorage.getItem("run");
+    localStorage.clear();
     let page;
     let nowspeed = 1;
     localStorage.setItem("start", "tenis");
@@ -26,10 +27,24 @@ $(document).ready(() => {
                 rot: "transform: rotate( -90deg );",
             },
         ],
+        run: [
+            {
+                arr: "gym",
+                pos: "top:0%; right: 1%;",
+                rot: "transform: rotate( -90deg );",
+            },
+        ],
         onrun: [
             {
                 arr: "gym",
                 pos: "top:0%; right: 1%;",
+                rot: "transform: rotate( -90deg );",
+            },
+        ],
+        dead: [
+            {
+                arr: "gym",
+                pos: "bottom:0%; left: 1%;",
                 rot: "transform: rotate( -90deg );",
             },
         ],
@@ -40,17 +55,17 @@ $(document).ready(() => {
         gym: [
             {
                 arr: "run",
-                pos: "top:12%;left:25.5%;height:88vh;width:125vh;",
+                pos: "top:12%;left:25.5%;height:88vh;width:108vh;",
                 img: "img/run.png",
             },
             {
                 arr: "dead",
-                pos: "top:20%;left:20%;height:30vh;width:32vh;",
+                pos: "top:20%;left:19%;height:30vh;width:30vh;",
                 img: "img/dead.png",
             },
             {
                 arr: "gymchair",
-                pos: "top:26.5%;left:0%;width:40vh;height:48vh;",
+                pos: "top:26.5%;left:0%;width:35vh;height:48vh;",
                 img: "img/gymchair.png",
             },
         ],
@@ -97,7 +112,7 @@ $(document).ready(() => {
         dead: [
             {
                 arr: "babel",
-                pos: "top:6%;left:2.2%;height:90vh;width:132vh;",
+                pos: "top:6%;left:2.2%;height:90vh;width:115vh;",
                 img: "img/babel.png",
             },
         ],
@@ -165,6 +180,14 @@ $(document).ready(() => {
         $(".button").remove();
         $(".arrow").remove();
         if (page == "run" && chairsolved != "true") {
+            if (arrowpos[background]) {
+                arrowpos[background].forEach((info) => {
+                    $("body").append(makearrow(info));
+                });
+            }
+            return;
+        }
+        if (page == "dead" && runsolved != "true") {
             if (arrowpos[background]) {
                 arrowpos[background].forEach((info) => {
                     $("body").append(makearrow(info));
@@ -272,11 +295,9 @@ $(document).ready(() => {
     $(document).on("click", ".dead", () => {
         if (babelsolved == "true") {
             makemodal("cleared");
-        } else if (runsolved == "true") {
-            changepage("dead");
-        } else {
-            makemodal("notnow");
+            return;
         }
+        changepage("dead");
     });
     $(document).on("click", ".babel", () => {
         makemodal("babel");
@@ -285,5 +306,5 @@ $(document).ready(() => {
         localStorage.setItem("start", "tenis");
         location.href = "tenis.html";
     });
-    changepage("onrun");
+    changepage("gym");
 });
