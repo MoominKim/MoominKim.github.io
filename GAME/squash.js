@@ -5,7 +5,6 @@ $(document).ready(function () {
     let isracket = localStorage.getItem("racket");
     let gamesolved = localStorage.getItem("game");
     let angrysolved = localStorage.getItem("angry");
-    localStorage.setItem("start", "tenis");
     $("#foreground").hide();
     const arrowpos = {
         squash: [
@@ -15,7 +14,7 @@ $(document).ready(function () {
                 rot: "transform: rotate( -90deg );",
             },
             {
-                arr: "tenis",
+                arr: "ending",
                 pos: "bottom:0%; right: 1%;",
                 rot: "transform: rotate( 90deg );",
             },
@@ -32,25 +31,25 @@ $(document).ready(function () {
         squash: [
             {
                 arr: "squashin",
-                pos: "top:70%;left:15%;",
-                img: "img/button14.png",
+                pos: "top:75.5%;left:21.5%;width:18vh;",
+                img: "img/squashin.png",
             },
             {
                 arr: "squashroom",
-                pos: "top:70%;left:75%;",
-                img: "img/button14.png",
+                pos: "top:12%;left:52%;height:85vh;width:80vh;",
+                img: "img/squashroom.png",
             },
         ],
         squashin: [
             {
                 arr: "balls",
-                pos: "top:70%;left:70%;",
-                img: "img/button14.png",
+                pos: "top:47%;left:35%;",
+                img: "img/balls.png",
             },
             {
                 arr: "rackets",
-                pos: "top:30%;left:70%;",
-                img: "img/button14.png",
+                pos: "top:0%;left:40%;",
+                img: "img/lackets.png",
             },
         ],
     };
@@ -92,12 +91,12 @@ $(document).ready(function () {
         },
         gethint: {
             name: "의문의 분노가 차오른다",
-            desc: "스쿼시볼을 잘 알아볼 것 같다",
+            desc: "“갑자기 뒤통수가 땡기면서 어떤 붉은공이 아른거린다...”",
             id: "gethint",
         },
         getrelic: {
             name: "상해를 가한 스쿼시볼",
-            desc: "내년에 ㅎㅎ가 수능을 망치면 이걸 머리에 맞은 탓입니다. 아 암튼 그럼.)",
+            desc: "내년에 ㅎㅎ가 수능을 망치면 이걸 머리에 맞은 탓입니다. 아 암튼 그럼.",
             id: "relic",
         },
     };

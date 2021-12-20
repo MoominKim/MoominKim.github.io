@@ -6,7 +6,7 @@ $(document).ready(function () {
     let ralysolved = localStorage.getItem("raly");
     let consolesolved = localStorage.getItem("console");
     let lacketsolved = localStorage.getItem("lacket");
-    localStorage.clear();
+    //localStorage.clear();
     $("#foreground").hide();
     const arrowpos = {
         tenis: [
@@ -129,7 +129,7 @@ $(document).ready(function () {
         },
         needball: {
             name: "??",
-            desc: "탁구공과 비슷한 크기의 홈이 파여 있다",
+            desc: "봉인 중앙에 탁구공 크기의 공간이 있다.",
             id: "needball",
         },
         describe: {
@@ -139,7 +139,7 @@ $(document).ready(function () {
         },
         ralyin: {
             name: "랠리머신이다",
-            desc: "빛나는 황금공이 올라왔다.",
+            desc: "황금색의 탁구공이다. 어딘가 쓸데가 있을 듯 하다.",
             id: "ralyin",
         },
         actived: {
@@ -149,12 +149,12 @@ $(document).ready(function () {
         },
         problem: {
             name: "비밀번호",
-            desc: "GAME에 비밀번호를 입력하세요",
+            desc: "ㄹ11 ㄹ6 → 뒤우주*10 qlalfqjsgh",
             id: "problem",
         },
         lockhint: {
             name: "탁구채",
-            desc: "중요한 탁구채의 정체에 대해 알아냈다.",
+            desc: "푸른하늘~ 푸른하늘 꿈이~ 담긴 나의 유물을 이곳에 남기노라”",
             id: "lockhint",
         },
         getlacket: {
