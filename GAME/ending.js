@@ -23,7 +23,7 @@ $(document).ready(function () {
         ending: [
             {
                 arr: "HI",
-                pos: "top:0%;left:2%;width:83vw;heigt:10vh;",
+                pos: "top:0%;left:5%;width:80vw;heigt:10vh;",
                 img: "img/HI.png",
             },
         ],
