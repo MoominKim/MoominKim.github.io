@@ -23,8 +23,8 @@ $(document).ready(function () {
         ending: [
             {
                 arr: "HI",
-                pos: "top:0%;left:0%;",
-                img: "img/button14.png",
+                pos: "top:0%;left:2%;width:83vw;heigt:10vh;",
+                img: "img/HI.png",
             },
         ],
     };
@@ -125,10 +125,10 @@ $(document).ready(function () {
             $ball.animate(
                 {
                     // stop()을 넣어주면 애니메이션 도중에 다른 애니메이션을 실행시킬 수 있다.
-                    bottom: "0px",
-                    left: "0px",
-                    width: "100%",
-                    height: "100%",
+                    bottom: "40px",
+                    left: "40px",
+                    width: "40%",
+                    height: "40%",
                 },
                 1000
             );
