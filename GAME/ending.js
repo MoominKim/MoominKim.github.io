@@ -93,6 +93,7 @@ $(document).ready(function () {
     function changepage(background) {
         page = background;
         $("#background").prop("src", "background/" + page + ".jpg");
+        $("#ending").remove();
         $(".button").remove();
         $(".arrow").remove();
         if (arrowpos[background]) {
@@ -141,7 +142,7 @@ $(document).ready(function () {
         }
     });
     $(document).on("click", "#ending", function (e) {
-        location.href = "credit.html";
+        changepage("S");
     });
     $(document).on("click", ".arrow", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];

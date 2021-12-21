@@ -68,6 +68,7 @@
 
 #ending {
     position: absolute;
+    cursor: pointer;
     bottom: 0px;
     left: 50%;
     width: 30%;
