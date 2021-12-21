@@ -2,6 +2,7 @@ $(document).ready(function () {
     let babel = localStorage.getItem("babel");
     let angry = localStorage.getItem("angry");
     let lacket = localStorage.getItem("lacket");
+    babel = angry = lacket = "true";
     localStorage.setItem("start", "tenis");
     //localStorage.clear();
     $("#foreground").hide();
@@ -130,7 +131,10 @@ $(document).ready(function () {
                     width: "40%",
                     height: "40%",
                 },
-                1000
+                1000,
+                function () {
+                    $(".HI").remove();
+                }
             );
             localStorage.clear();
         } else {
