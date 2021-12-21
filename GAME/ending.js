@@ -2,8 +2,8 @@ $(document).ready(function () {
     let babel = localStorage.getItem("babel");
     let angry = localStorage.getItem("angry");
     let lacket = localStorage.getItem("lacket");
-    babel = angry = lacket = "true";
     localStorage.setItem("start", "tenis");
+    babel = angry = lacket = "true";
     //localStorage.clear();
     $("#foreground").hide();
     const arrowpos = {
@@ -123,6 +123,7 @@ $(document).ready(function () {
         if (babel == "true" && lacket == "true" && angry == "true") {
             $("body").append(makeball());
             var $ball = $("#ending");
+            $(".HI").remove();
             $ball.animate(
                 {
                     // stop()을 넣어주면 애니메이션 도중에 다른 애니메이션을 실행시킬 수 있다.
@@ -131,10 +132,7 @@ $(document).ready(function () {
                     width: "40%",
                     height: "40%",
                 },
-                1000,
-                function () {
-                    $(".HI").remove();
-                }
+                1000
             );
             localStorage.clear();
         } else {

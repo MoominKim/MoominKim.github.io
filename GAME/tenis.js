@@ -127,6 +127,13 @@ $(document).ready(function () {
                 img: "img/button17.png",
             },
         ],
+        cabinopen: [
+            {
+                arr: "jjokji",
+                pos: "top:44%;left:20.5%;width:27vh;",
+                img: "img/button57.png",
+            },
+        ],
     };
     const Mod = {
         cleared: {
@@ -301,9 +308,6 @@ $(document).ready(function () {
         if (page == "ralyconsole") {
             makemodal("actived");
         }
-        if (page == "cabinopen") {
-            makemodal("lockhint");
-        }
     }
     /*
 
@@ -370,6 +374,10 @@ $(document).ready(function () {
         }
         if (myclass == "button14") {
             makemodal("button14");
+            return;
+        }
+        if (myclass == "jjokji") {
+            makemodal("lockhint");
             return;
         }
         changepage(myclass);
