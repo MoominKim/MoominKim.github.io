@@ -2,7 +2,6 @@ $(document).ready(function () {
     let babel = localStorage.getItem("babel");
     let angry = localStorage.getItem("angry");
     let lacket = localStorage.getItem("lacket");
-    babel = angry = lacket = "true";
     localStorage.setItem("start", "tenis");
     //localStorage.clear();
     $("#foreground").hide();
