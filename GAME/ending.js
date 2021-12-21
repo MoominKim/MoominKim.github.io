@@ -3,7 +3,7 @@ $(document).ready(function () {
     let angry = localStorage.getItem("angry");
     let lacket = localStorage.getItem("lacket");
     localStorage.setItem("start", "tenis");
-    babel = angry = lacket = "true";
+    //babel = angry = lacket = "true";
     //localStorage.clear();
     $("#foreground").hide();
     const arrowpos = {
@@ -141,7 +141,7 @@ $(document).ready(function () {
         }
     });
     $(document).on("click", "#ending", function (e) {
-        location.href = "start.html";
+        location.href = "credit.html";
     });
     $(document).on("click", ".arrow", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];

@@ -95,7 +95,7 @@ $(document).ready(function () {
             id: "gethint",
         },
         getrelic: {
-            name: "상해를 가한 스쿼시볼",
+            name: "뚝배기 브레이커 스쿼시볼",
             desc: "내년에 ㅎㅎ가 수능을 망치면 이걸 머리에 맞은 탓입니다. 아 암튼 그럼.",
             id: "relic",
         },
