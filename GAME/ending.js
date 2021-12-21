@@ -142,7 +142,9 @@ $(document).ready(function () {
         }
     });
     $(document).on("click", "#ending", function (e) {
+        $("body").hide();
         changepage("S");
+        $("body").fadeIn(2000);
     });
     $(document).on("click", ".arrow", function (e) {
         let myclass = $(this).attr("class").split(" ")[1];
