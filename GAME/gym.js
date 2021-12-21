@@ -245,7 +245,7 @@ $(document).ready(() => {
                 changepage("gym");
             }
             if (page == "onrun" && nowspeed == 1) changepage("onrun");
-            if (page == "onrun" && nowspeed == 3) {
+            if (page == "onrun" && nowspeed == 4) {
                 runsolved = "true";
                 localStorage.setItem("run", true);
                 changepage("gym");
