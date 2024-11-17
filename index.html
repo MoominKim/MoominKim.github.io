@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Counter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    .button-container {
+      margin: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+    }
+    .counter {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Button Counter</h1>
+  <div class="button-container">
+    <button id="button-a">Increase A</button>
+    <div class="counter" id="counter-a">A: 0</div>
+  </div>
+  <div class="button-container">
+    <button id="button-b">Increase B</button>
+    <div class="counter" id="counter-b">B: 0</div>
+  </div>
+  <div class="button-container">
+    <button id="button-c">Increase C</button>
+    <div class="counter" id="counter-c">C: 0</div>
+  </div>
+  <div class="button-container">
+    <button id="button-d">Increase D</button>
+    <div class="counter" id="counter-d">D: 0</div>
+  </div>
+
+  <script>
+    // 초기 변수 값
+    let counters = { a: 0, b: 0, c: 0, d: 0 };
+
+    // 특정 버튼 클릭 시 실행되는 함수
+    function increaseCounter(button) {
+      counters[button]++;
+      document.getElementById(`counter-${button}`).textContent = `${button.toUpperCase()}: ${counters[button]}`;
+    }
+
+    // 버튼 클릭 이벤트 핸들러 연결
+    document.getElementById("button-a").addEventListener("click", () => increaseCounter("a"));
+    document.getElementById("button-b").addEventListener("click", () => increaseCounter("b"));
+    document.getElementById("button-c").addEventListener("click", () => increaseCounter("c"));
+    document.getElementById("button-d").addEventListener("click", () => increaseCounter("d"));
+  </script>
+</body>
+</html>
