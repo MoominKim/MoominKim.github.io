@@ -27,25 +27,27 @@
 <body>
   <h1>Button Counter</h1>
   <div class="button-container">
-    <button id="button-a">대니구</button>
+    <button id="button-a">  대니구  </button>
   </div>
   <div class="button-container">
-    <button id="button-b">설요은</button>
+    <button id="button-b">  설요은  </button>
   </div>
   <div class="button-container">
-    <button id="button-c">아마고수1</button>
+    <button id="button-c"> 아마고수1 </button>
   </div>
   <div class="button-container">
-    <button id="button-d">아마고수2</button>
+    <button id="button-d"> 아마고수2 </button>
   </div>
 
   <script>
     // 만약 이 코드를 들어와서 읽는 사람이 있다면 깃헙 페이지에서 백엔드를 구현하는건 굉장히 귀찮은 일이었음을 알아주길 바라..
-
+    let did_vote=0
     // 특정 버튼 클릭 시 실행되는 함수
     function increaseCounter(button) {
-      alert("투표 참여 완료되었습니다!")
+      if(did_vote==0)alert("이미 투표에 참여하셨습니다")
+      else alert("투표 참여 완료되었습니다!")
       document.getElementById(`counter-${button}`).textContent = `${button.toUpperCase()}: ${counters[button]}`;
+      did_vote=1
     }
 
     // 버튼 클릭 이벤트 핸들러 연결
