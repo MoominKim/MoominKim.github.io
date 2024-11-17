@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Counter</title>
+  <style>
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Click a Button to Increase Counters</h1>
+  <button id="button-a">Increase A</button>
+  <button id="button-b">Increase B</button>
+  <button id="button-c">Increase C</button>
+  <button id="button-d">Increase D</button>
+
+  <script>
+    // 버튼 클릭 이벤트 핸들러
+    function handleClick(buttonName) {
+      // 백엔드 API에 값 증가 요청
+      fetch(`/api/increase`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ button: buttonName }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to update counter.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(`${buttonName} value updated:`, data);
+          alert(`${buttonName.toUpperCase()} count increased!`);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Failed to update the counter.");
+        });
+    }
+
+    // 각 버튼에 이벤트 리스너 추가
+    document.getElementById("button-a").addEventListener("click", () => handleClick("a"));
+    document.getElementById("button-b").addEventListener("click", () => handleClick("b"));
+    document.getElementById("button-c").addEventListener("click", () => handleClick("c"));
+    document.getElementById("button-d").addEventListener("click", () => handleClick("d"));
+  </script>
+</body>
+</html>
